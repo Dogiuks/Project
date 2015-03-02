@@ -1,0 +1,55 @@
+# depslib dependency file v1.0
+1420474362 source:c:\users\domas\documents\warehouse\cgp_warehouse.c
+	<stdio.h>
+	"cgp_warehouse.h"
+
+1420474392 c:\users\domas\documents\warehouse\cgp_warehouse.h
+	<stdio.h>
+	<time.h>
+
+1420474235 source:c:\users\domas\documents\warehouse\cgp_functions_warehouse.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	"cgp_warehouse.h"
+
+1420473454 source:c:\users\domas\documents\warehouse\node_function_warehouse.c
+	"cgp_warehouse.h"
+	<math.h>
+
+1424346935 source:c:\users\domas\dropbox\individual project\warehouse\cgp_functions_warehouse.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	"cgp_warehouse.h"
+	"cgp.h"
+
+1425131084 c:\users\domas\dropbox\individual project\warehouse\cgp_warehouse.h
+	<stdio.h>
+	<time.h>
+	<stdbool.h>
+
+1424429269 source:c:\users\domas\dropbox\individual project\warehouse\cgp_warehouse.c
+	<stdio.h>
+	"cgp_warehouse.h"
+	"cgp.h"
+
+1420473454 source:c:\users\domas\dropbox\individual project\warehouse\node_function_warehouse.c
+	"cgp_warehouse.h"
+	<math.h>
+
+1425166524 source:c:\users\domas\dropbox\individual project\warehouse\cgp_functions.c
+	<stdio.h>
+	<stdlib.h>
+	"cgp_warehouse.h"
+	"cgp.h"
+
+1425131382 c:\users\domas\dropbox\individual project\warehouse\cgp.h
+	<stdio.h>
+	<time.h>
+	"cgp_warehouse.h"
+

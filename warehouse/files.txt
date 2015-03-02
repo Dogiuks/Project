@@ -1,0 +1,12 @@
+Type		Date		Time		File
+In		Date		Time		Testfiles/products.txt
+Out		Date		Time		Testfiles/deliveries1.txt
+In		Date		Time		Testfiles/in1.txt
+Out		Date		Time		Testfiles/deliveries2.txt
+In		Date		Time		Testfiles/in2.txt
+Out		Date		Time		Testfiles/deliveries3.txt
+In		Date		Time		Testfiles/in3.txt
+Out		Date		Time		Testfiles/deliveries4.txt
+In		Date		Time		Testfiles/in4.txt
+In		Date		Time		Testfiles/deliveries5.txt
+EOF
