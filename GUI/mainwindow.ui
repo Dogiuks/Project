@@ -60,45 +60,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="openFileButton">
-        <property name="maximumSize">
-         <size>
-          <width>250</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Open File</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="maximumSize">
-         <size>
-          <width>250</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Run CGP</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addFileButton">
-        <property name="maximumSize">
-         <size>
-          <width>250</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Add File</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="cgpButton">
         <property name="maximumSize">
          <size>
@@ -160,6 +121,9 @@
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionImport_warehouse">
    <property name="text">
@@ -174,6 +138,9 @@
   <action name="actionAdd_file">
    <property name="text">
     <string>Add file</string>
+   </property>
+   <property name="shortcut">
+    <string>O</string>
    </property>
   </action>
   <action name="actionCreate_file">
