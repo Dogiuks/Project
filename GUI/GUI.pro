@@ -18,7 +18,8 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     openfiledialog.h \
-    opendialog.h
+    opendialog.h \
+    cgp_warehouse.h
 
 FORMS    += \
     mainwindow.ui \

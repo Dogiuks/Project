@@ -15,8 +15,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private slots:
-    void on_addFileButton_clicked();
+    void on_cgpButton_clicked();
+
+    void on_actionOpen_triggered();
+
+    void on_buttonHome_clicked();
 
 private:
     Ui::MainWindow *ui;
