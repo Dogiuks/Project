@@ -11,6 +11,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    QColor getGradient( int atPoint, int max);
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
