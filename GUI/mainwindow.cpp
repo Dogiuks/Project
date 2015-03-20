@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "cgp_warehouse.h"
+#include "cgp.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,11 +18,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_cgpButton_clicked()
 {
 
-    for(int i=0; i<100; i++)
-    {
-        output[i].code = i;
-        output[i].demand = i+1;
-    }
+    make_output();
 }
 
 
