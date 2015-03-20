@@ -24,17 +24,29 @@ void MainWindow::on_cgpButton_clicked()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    ui->warehouseWiew->setColumnCount(10);
-    ui->warehouseWiew->setRowCount(10);
 
-    for(int i=0; i<10;i++)
+/*************************delete*************************************/
+   define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");
+/*************************delete****************************************/
+    ui->warehouseWiew->setColumnCount(warehouse_grid_x);
+    ui->warehouseWiew->setRowCount(warehouse_grid_y);
+    for(int i=0; i<warehouse_grid_x;i++)
     {
         ui->warehouseWiew->setColumnWidth(i, 25);
+    }
+    for(int i=0; i<warehouse_grid_y;i++)
+    {
         ui->warehouseWiew->setRowHeight(i, 25);
-        for(int j=0; j<10; j++)
+    }
+    for(int i=0; i<warehouse_grid_y;i++)
+    {
+        for(int j=0; j<warehouse_grid_x; j++)
         {
-            ui->warehouseWiew->setItem(j, i, new QTableWidgetItem());
-            ui->warehouseWiew->item(j,i)->setBackgroundColor(Qt::black);
+            ui->warehouseWiew->setItem(i, j, new QTableWidgetItem());
+            if (warehouse_grid[i*warehouse_grid_x+j])
+                ui->warehouseWiew->item(i,j)->setBackgroundColor(Qt::black);
+            else
+                ui->warehouseWiew->item(i,j)->setBackgroundColor(Qt::white);
         }
     }
 

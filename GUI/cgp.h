@@ -72,6 +72,7 @@ int* old_fitness;
 int best_fitness;
 
 void make_output(void);
+void coppy_output(product_pointer* source, product_pointer* destination);
 int find_worst_pick(int* pick_list, int list_size, int gate);
 void run_EA(void);
 void create_population(node_pointer* population);

@@ -17,7 +17,7 @@ extern "C"
 #include <time.h>
 
 
-void define_warehouse(char warehousefile[MAX_FILENAME])
+void define_warehouse(char warehousefile[MAX_FILENAME], char gridfile[MAX_FILENAME])
 {
     FILE*	fp;
     char dummy[50];
@@ -50,6 +50,23 @@ void define_warehouse(char warehousefile[MAX_FILENAME])
             fscanf(fp,"%d", &warehouse[i].dist[j]);
         }
     }
+    printf("test");
+    fclose(fp);
+    fp=fopen(gridfile,"r");
+    if (!fp)
+    {
+        printf("Missing file: %s\n",gridfile);
+        exit(1);
+    }
+    printf("test");
+    fscanf(fp,"%s %d %s %d", dummy, &warehouse_grid_x, dummy, &warehouse_grid_y);
+    warehouse_grid = (int*) malloc(sizeof(int)*warehouse_grid_x*warehouse_grid_y);
+    for(i=0;i<warehouse_grid_y;i++)
+    {
+        for(j=0;j<warehouse_grid_x;j++)
+            fscanf(fp, "%d", &warehouse_grid[i*warehouse_grid_x + j]);
+    }
+    fclose(fp);
 }
 
 struct delivery read_deliveries(char productsfile[MAX_FILENAME])

@@ -52,8 +52,14 @@ struct file
 
 typedef struct products* product_pointer;
 
-int  num_files;
+typedef product_pointer* outputtype;
 
+int  num_files;
+outputtype *output_array;
+
+int warehouse_grid_x;
+int warehouse_grid_y;
+int *warehouse_grid;
 struct file *files;
 struct products* empty_input;
 struct delivery* deliveries;
@@ -62,9 +68,8 @@ struct location* warehouse;
 
 /* function prototypes */
 
-
 void create_empty_input(void);
-void define_warehouse(char warehousefile[MAX_FILENAME]);
+void define_warehouse(char warehousefile[MAX_FILENAME], char gridfile[MAX_FILENAME]);
 struct delivery read_deliveries(char productsfile[MAX_FILENAME]);
 struct delivery read_input(char productsfile[MAX_FILENAME]);
 void read_files(char file_list[MAX_FILENAME]);
