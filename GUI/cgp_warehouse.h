@@ -69,6 +69,7 @@ struct location* warehouse;
 /* function prototypes */
 
 void create_empty_input(void);
+void read_list(char file_list[MAX_FILENAME]);
 void define_warehouse(char warehousefile[MAX_FILENAME], char gridfile[MAX_FILENAME]);
 struct delivery read_deliveries(char productsfile[MAX_FILENAME]);
 struct delivery read_input(char productsfile[MAX_FILENAME]);

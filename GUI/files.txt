@@ -1,0 +1,6 @@
+Type		Date		Time		File
+In		Date		Time		F:/IP/Project/GUI/Testfiles/in1.txt
+Out		Date		Time		F:/IP/Project/GUI/Testfiles/deliveries1.txt
+In		Date		Time		F:/IP/Project/GUI/Testfiles/in2.txt
+Out		Date		Time		F:/IP/Project/GUI/Testfiles/deliveries2.txt
+EOF

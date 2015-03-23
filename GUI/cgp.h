@@ -16,13 +16,13 @@ extern "C"
 #define __CGP_H__
 
 
-#define NUM_COL 10000
+#define NUM_COL 1000
 #define NUM_ROW 1
 #define NUM_NODES NUM_ROW*NUM_COL
 #define LEVELS_BACK 100
 #define POPULATION_SIZE 25
 #define PENALTY 1
-#define NUM_GENERATIONS 50000
+#define NUM_GENERATIONS 500
 
 #define MU 2
 //all population is mutated and parents not preserved
@@ -71,7 +71,7 @@ int* old_fitness;
 
 int best_fitness;
 
-void make_output(void);
+void create_output(struct node* ch);
 void coppy_output(product_pointer* source, product_pointer* destination);
 int find_worst_pick(int* pick_list, int list_size, int gate);
 void run_EA(void);

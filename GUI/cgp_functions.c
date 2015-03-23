@@ -12,23 +12,13 @@ extern "C"
 #include <stdio.h>
 #include <stdlib.h>
 
-void make_output(void)
-{
-    int i;
-    for(i=0; i<100; i++)
-    {
-
-         output[i].code = i;
-         output[i].demand = i+1;
-    }
-}
-
 
 void run_EA(void)
 {
     node_pointer* population;
     int i, j;
     int* fitness;
+    int fittest = 0;
 
     fitness = (int*) malloc(sizeof(int)*POPULATION_SIZE);
     population = (node_pointer*)malloc(sizeof(node_pointer)*POPULATION_SIZE);
@@ -53,7 +43,13 @@ void run_EA(void)
         }
     }
     evaluate_population(population, fitness);
-};
+    for(i=0;i<POPULATION_SIZE;i++)
+    {
+        if(fitness[i]<fitness[fittest])
+            fittest = i;
+    }
+    create_output(population[fittest]);
+}
 
 void write_output(node_pointer* population, int* fitness)
 {
@@ -360,7 +356,7 @@ int find_best_pick(int* pick_list, int list_size, int gate)
 void create_population(node_pointer* population)
 {
     int i;
-    if (first_run)
+    if (1)
     {
         for (i=0; i<POPULATION_SIZE; i++)
         {
@@ -440,9 +436,9 @@ void decode(struct node* ch, product_pointer* outputs)
     for (i=0; i<warehouse_size; i++)
     {
         compute_node(NUM_NODES+i, ch);
-        outputs[i] = ch[NUM_NODES+i-warehouse_size].out;
+        outputs[i] = (product_pointer) ch[NUM_NODES+i-warehouse_size].out;
     }
-};
+}
 
 void clean_chromosome(struct node* ch)
 {

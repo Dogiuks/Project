@@ -17,16 +17,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_cgpButton_clicked()
 {
+    run_EA();
 
-    make_output();
 }
 
 
 void MainWindow::on_actionOpen_triggered()
 {
-
+create_empty_input();
 /*************************delete*************************************/
    define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");
+   read_list("F:/IP/Project/GUI/files.txt");
 /*************************delete****************************************/
     ui->warehouseWiew->setColumnCount(warehouse_grid_x);
     ui->warehouseWiew->setRowCount(warehouse_grid_y);

@@ -190,6 +190,7 @@ void read_list(char file_list[MAX_FILENAME])
     }
     fclose(fp);
     calculate_product_qnt(num_files);
+    printf("list reading finished");
 }
 
 void print_warehouse(void)
