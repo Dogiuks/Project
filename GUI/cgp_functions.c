@@ -178,6 +178,7 @@ void select_parents(node_pointer* population, int* fitness)
 void mutate(struct node* ch)
 {
     int random, i;
+    clean_chromosome(ch);
 
     for(i=0;i<MUTATION_RATE*NUM_NODES/100;i++)
     {
@@ -207,6 +208,7 @@ void evaluate_population(node_pointer* population, int* evaluation)
                 product_count = files[j].deliv.load;
                 num_of_products = files[j].deliv.list_size;
                 create_input(product_count, num_of_products);
+                clean_chromosome(population[i]);
                 decode(population[i], output);
                 evaluation[i] += (evaluate_output(output, product_count,
                                                   num_of_products)/(j+1));
@@ -238,14 +240,15 @@ void create_output(struct node* ch)
             product_count = files[j].deliv.load;
             num_of_products = files[j].deliv.list_size;
             create_input(product_count, num_of_products);
+            clean_chromosome(ch);
             decode(ch, output);
         }
         else
         {
             evaluate_position(output, files[j].deliv);
         }
-        output_array[j]= NULL;
-         output_array[j] = (product_pointer*)realloc(output_array[j], sizeof(product_pointer)*warehouse_size);
+        output_array[j] = NULL;
+        output_array[j] = (product_pointer*)realloc(output_array[j], sizeof(product_pointer)*warehouse_size);
         coppy_output(output, output_array[j]);
     }
 }
@@ -296,7 +299,7 @@ int evaluate_output(product_pointer* output, struct products* product_count, int
 int evaluate_position(product_pointer* output, struct delivery deliv)
 {
     int i,j,k;
-    int code, fitness=0, best_pick, gate;
+    int code, fitness=0, worst_pick, gate;
     int* pickup_list;
 
     //deliver all products
@@ -318,14 +321,14 @@ int evaluate_position(product_pointer* output, struct delivery deliv)
             k++;
         }while((k<warehouse_size) && (i < deliv.load[j].qnt));
         //look for products closer to the gate
-        best_pick = find_best_pick(pickup_list, i, gate);
+        worst_pick = find_worst_pick(pickup_list, i, gate);
         for (; k<warehouse_size;k++)
         {
             if((output[k]->code == code)
-                && (warehouse[k].dist[gate]<warehouse[best_pick].dist[gate]))
+                && (warehouse[k].dist[gate]<warehouse[worst_pick].dist[gate]))
             {
-                pickup_list[best_pick]=k;
-                best_pick = find_best_pick(pickup_list, deliv.load[j].qnt, gate);
+                pickup_list[worst_pick]=k;
+                worst_pick = find_worst_pick(pickup_list, deliv.load[j].qnt, gate);
             }
         }
         //add penalty to fitness and remove products from list
@@ -339,20 +342,20 @@ int evaluate_position(product_pointer* output, struct delivery deliv)
     return fitness;
 }
 
-int find_best_pick(int* pick_list, int list_size, int gate)
+int find_worst_pick(int* pick_list, int list_size, int gate)
 {
-    int best_pick,  min_dist = 0;
+    int worst_pick,  max_dist = 0;
     int i;
 
     for(i=0;i<list_size;i++)
     {
-        if(warehouse[pick_list[i]].dist[gate]<min_dist)
+        if(warehouse[pick_list[i]].dist[gate]>max_dist)
         {
-            min_dist = warehouse[pick_list[i]].dist[gate];
-            best_pick = i;
+            max_dist = warehouse[pick_list[i]].dist[gate];
+            worst_pick = i;
         }
     }
-    return best_pick;
+    return worst_pick;
 }
 
 void create_population(node_pointer* population)

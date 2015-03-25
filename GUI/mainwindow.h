@@ -12,6 +12,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     QColor getGradient( int atPoint, int max);
+    void updateWarehouseWiew(void);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -24,6 +25,10 @@ private slots:
     void on_actionOpen_triggered();
 
     void on_buttonHome_clicked();
+
+    void on_buttonNext_clicked();
+
+    void on_buttonBack_clicked();
 
 private:
     Ui::MainWindow *ui;
