@@ -229,7 +229,7 @@ void create_output(struct node* ch)
     int j;
 
     output = (product_pointer*)malloc(sizeof(product_pointer)*warehouse_size);
-    output_array = (outputtype*)realloc(output_array, sizeof(outputtype)*num_files);
+    output_array = (outputtype*)realloc(output_array, sizeof(product_pointer*)*num_files);
 
     for(j=0;j<num_files;j++)
     {
@@ -244,6 +244,8 @@ void create_output(struct node* ch)
         {
             evaluate_position(output, files[j].deliv);
         }
+        output_array[j]= NULL;
+         output_array[j] = (product_pointer*)realloc(output_array[j], sizeof(product_pointer)*warehouse_size);
         coppy_output(output, output_array[j]);
     }
 }
@@ -251,7 +253,7 @@ void create_output(struct node* ch)
 void coppy_output(product_pointer* source, product_pointer* destination)
 {
     int i;
-    destination = (product_pointer*)realloc(destination, sizeof(product_pointer)*warehouse_size);
+
     for(i=0;i<warehouse_size;i++)
         destination[i] = source[i];
 }

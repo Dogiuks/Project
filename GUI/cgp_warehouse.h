@@ -63,7 +63,7 @@ int *warehouse_grid;
 struct file *files;
 struct products* empty_input;
 struct delivery* deliveries;
-struct products output[100];
+//struct products output[100];
 struct location* warehouse;
 
 /* function prototypes */

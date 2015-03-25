@@ -55,28 +55,39 @@ create_empty_input();
     ui->buttonHome->setEnabled(true);
     ui->buttonBack->setEnabled(true);
     ui->buttonNext->setEnabled(true);
-    ui->listWidget->addItem("file 1");
+    for(int i = 0; i<num_files; i++)
+    {
+        ui->listWidget->addItem(files[i].name);
+    }
+    ui->listWidget->setCurrentRow(0);
 }
 
 
 void MainWindow::on_buttonHome_clicked()
 {
+    int count = 0;
+    product_pointer *selected_output;
+    selected_output = (product_pointer *)output_array[1];
 
-    for(int i=0; i<10; i++){
-        for(int j=0; j<10; j++){
-
-            ui->warehouseWiew->item(j,i)->setBackgroundColor(getGradient(output[i+10*j].demand, 100));
-            ui->warehouseWiew->item(j,i)->setText(QString::number(output[i+10*j].demand));
-            ui->warehouseWiew->item(j,i)->setTextColor(QColor(Qt::white));
+    for(int i=0; i<warehouse_grid_y;i++)
+    {
+        for(int j=0; j<warehouse_grid_x; j++)
+        {
+            if (warehouse_grid[i*warehouse_grid_x+j])
+            {
+                ui->warehouseWiew->item(i,j)->setBackgroundColor(getGradient(selected_output[count]->demand, 100));
+                count++;
+            }
         }
     }
 }
+
 QColor MainWindow::getGradient( int atPoint, int max)
 {
     int red;
     int green;
     int blue;
-    int num = 1+(74*atPoint/max);
+    int num = (74*atPoint/max);
 
     if(num>60)
     {
