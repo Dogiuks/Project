@@ -30,6 +30,8 @@ private slots:
 
     void on_buttonBack_clicked();
 
+    void on_actionCGP_settings_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

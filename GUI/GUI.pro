@@ -18,14 +18,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     opendialog.cpp \
     cgp_functions.c \
-    cgp_functions_warehouse.c
+    cgp_functions_warehouse.c \
+    cgpsettings.cpp
 
 HEADERS  += mainwindow.h \
     openfiledialog.h \
     opendialog.h \
     cgp.h \
-    cgp_warehouse.h
+    cgp_warehouse.h \
+    cgpsettings.h
+
 
 FORMS    += \
     mainwindow.ui \
-    opendialog.ui
+    opendialog.ui \
+    cgpsettings.ui

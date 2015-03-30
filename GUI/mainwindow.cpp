@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 #include "cgp_warehouse.h"
 #include "cgp.h"
+#include "cgpsettings.h"
+#include "opendialog.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -158,4 +161,11 @@ void MainWindow::on_buttonBack_clicked()
         ui->listWidget->setCurrentRow(ui->listWidget->currentRow()-1);
         updateWarehouseWiew();
     }
+}
+
+void MainWindow::on_actionCGP_settings_triggered()
+{
+    CGPSettings settings;
+    settings.setModal(true);
+    settings.exec();
 }
