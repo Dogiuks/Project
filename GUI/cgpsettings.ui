@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>401</width>
     <height>363</height>
    </rect>
   </property>
@@ -101,7 +101,7 @@
            <number>100000</number>
           </property>
           <property name="singleStep">
-           <number>10</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -137,7 +137,7 @@
            <number>100000</number>
           </property>
           <property name="singleStep">
-           <number>10</number>
+           <number>1</number>
           </property>
           <property name="value">
            <number>1000</number>
@@ -147,12 +147,6 @@
        </layout>
       </item>
      </layout>
-     <zorder>label</zorder>
-     <zorder>num_col_spinBox</zorder>
-     <zorder>label_2</zorder>
-     <zorder>num_row_spinBox</zorder>
-     <zorder>label_2</zorder>
-     <zorder>num_row_spinBox</zorder>
     </widget>
    </item>
    <item>

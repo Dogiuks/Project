@@ -30,4 +30,46 @@ CGPSettings::~CGPSettings()
 
 void CGPSettings::on_buttonBox_accepted()
 {
+    set_elitism(ui->elytism_spinBox->value());
+    set_levels_back(ui->levels_back_spinBox->value());
+    set_mutation_rate(ui->mutation_rate_spinBox->value());
+    set_num_row(ui->num_row_spinBox->value());
+    set_num_col(ui->num_col_spinBox->value());
+    set_num_generations(ui->num_generations_spinBox->value());
+    set_penalty(ui->Penalty_spinBox->value());
+    set_population_size(ui->population_size_spinBox->value());
+    set_preserve_parents(ui->preserve_parents_checkBox->isChecked());
+    set_roulete(ui->roulete_spinBox->value());
+    set_tournament(ui->tournament_spinBox->value());
+    set_t_size(ui->t_size_spinBox->value());
+    this->close();
+}
+
+void CGPSettings::on_buttonBox_rejected()
+{
+    this->close();
+}
+
+void CGPSettings::on_tournament_spinBox_valueChanged(int arg1)
+{
+    if(arg1 == 0)
+    {
+        ui->t_size_spinBox->setDisabled(true);
+    }
+    else
+    {
+        ui->t_size_spinBox->setEnabled(true);
+    }
+}
+
+void CGPSettings::on_elytism_spinBox_valueChanged(int arg1)
+{
+    if(arg1 == 0)
+    {
+        ui->preserve_parents_checkBox->setDisabled(true);
+    }
+    else
+    {
+        ui->preserve_parents_checkBox->setEnabled(true);
+    }
 }

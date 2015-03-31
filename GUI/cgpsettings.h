@@ -18,6 +18,12 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_buttonBox_rejected();
+
+    void on_tournament_spinBox_valueChanged(int arg1);
+
+    void on_elytism_spinBox_valueChanged(int arg1);
+
 private:
     Ui::CGPSettings *ui;
 };

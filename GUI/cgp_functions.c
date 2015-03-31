@@ -720,6 +720,66 @@ int get_t_size(void)
     return T_SIZE;
 }
 
+void set_elitism(int a)
+{
+    ELITISM = a;
+}
+
+void set_levels_back(int a)
+{
+    LEVELS_BACK = a;
+}
+
+void set_mutation_rate(float a)
+{
+    MUTATION_RATE = a;
+}
+
+void set_num_row(int a)
+{
+    NUM_ROW = a;
+}
+
+void set_num_col(int a)
+{
+    NUM_COL = a;
+}
+
+void set_num_generations(int a)
+{
+    NUM_GENERATIONS = a;
+}
+
+void set_penalty(int a)
+{
+    PENALTY = a;
+}
+
+void set_population_size(int a)
+{
+    POPULATION_SIZE = a;
+}
+
+void set_preserve_parents(int a)
+{
+    PRESERVE_PARENTS = a;
+}
+
+void set_roulete(int a)
+{
+    ROULETTE = a;
+}
+
+void set_tournament(int a)
+{
+    TOURNAMENT = a;
+}
+
+void set_t_size(int a)
+{
+    T_SIZE = a;
+}
+
 #ifdef __cplusplus
 }
 #endif __cplusplus

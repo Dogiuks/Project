@@ -75,6 +75,18 @@ int get_preserve_parents(void);
 int get_roulete(void);
 int get_tournament(void);
 int get_t_size(void);
+void set_elitism(int a);
+void set_levels_back(int a);
+void set_mutation_rate(float a);
+void set_num_row(int a);
+void set_num_col(int a);
+void set_num_generations(int a);
+void set_penalty(int a);
+void set_population_size(int a);
+void set_preserve_parents(int a);
+void set_roulete(int a);
+void set_tournament(int a);
+void set_t_size(int a);
 
 #endif
 
