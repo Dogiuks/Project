@@ -2,13 +2,14 @@
    Domas Druzas 2015
 */
 
-#include "cgp_warehouse.h"
-#include "cgp.h"
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif __cplusplus
+
+#include "cgp_warehouse.h"
+#include "cgp.h"
+#include "globals.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,6 +20,7 @@ void run_EA(void)
     int i, j;
     int* fitness;
     int fittest = 0;
+    NUM_NODES = NUM_ROW*NUM_COL;
 
     fitness = (int*) malloc(sizeof(int)*POPULATION_SIZE);
     population = (node_pointer*)malloc(sizeof(node_pointer)*POPULATION_SIZE);
@@ -98,10 +100,10 @@ void select_parents(node_pointer* population, int* fitness)
 {
     int best, i, j, n=0;
     int random;
-    node_pointer new_population[MU];
-    #ifdef ROULETTE
+    node_pointer *new_population;
     int total;
-    #endif // ROULETTE
+
+    new_population = (node_pointer*)malloc(sizeof(node_pointer)*MU);
 
     for(i=0;i<MU;i++)
     {
@@ -115,14 +117,13 @@ void select_parents(node_pointer* population, int* fitness)
             best = i;
     }
     best_fitness = fitness[best];
-    #ifdef ELITISM
+
     for(j=0;j<ELITISM;j++)
     {
         copy_chromosome(population[best], new_population[n]);
         n++;
     }
-    #endif
-    #ifdef TOURNAMENT
+
     for(j=0;j<TOURNAMENT;j++)
     {
         best = rand()%POPULATION_SIZE;
@@ -135,8 +136,7 @@ void select_parents(node_pointer* population, int* fitness)
         copy_chromosome(population[best], new_population[n]);
         n++;
     }
-    #endif
-    #ifdef ROULETTE
+
     for(j=0;j<ROULETTE;j++)
     {
         best = 0;
@@ -160,7 +160,7 @@ void select_parents(node_pointer* population, int* fitness)
         copy_chromosome(population[i], new_population[n]);
         n++;
     }
-    #endif
+
     for(i=0;i<MU;i++)
     {
         clean_chromosome(new_population[i]);
@@ -173,6 +173,7 @@ void select_parents(node_pointer* population, int* fitness)
     {
         free(new_population[i]);
     }
+    free(new_population);
 }
 
 void mutate(struct node* ch)
@@ -653,6 +654,70 @@ void calculate_product_qnt(int step)
 
     }
     free(product_count);
+}
+
+product_pointer* return_selected_output(int i)
+{
+    return output_array[i];
+}
+
+int get_elitism(void)
+{
+    return ELITISM;
+}
+
+int get_levels_back(void)
+{
+    return LEVELS_BACK;
+}
+
+int get_mutation_rate(void)
+{
+    return MUTATION_RATE;
+}
+
+int get_num_row(void)
+{
+    return NUM_ROW;
+}
+
+int get_num_col(void)
+{
+    return NUM_COL;
+}
+
+int get_num_generations(void)
+{
+    return NUM_GENERATIONS;
+}
+
+int get_penalty(void)
+{
+    return PENALTY;
+}
+int get_population_size(void)
+{
+    return POPULATION_SIZE;
+}
+
+int get_preserve_parents(void)
+{
+    return PRESERVE_PARENTS;
+}
+
+int get_roulete(void)
+{
+    return ROULETTE;
+}
+
+int get_tournament(void)
+{
+    return TOURNAMENT;
+}
+
+int get_t_size(void)
+{
+    return T_SIZE;
 }
 
 #ifdef __cplusplus

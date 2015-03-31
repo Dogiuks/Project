@@ -26,7 +26,8 @@ HEADERS  += mainwindow.h \
     opendialog.h \
     cgp.h \
     cgp_warehouse.h \
-    cgpsettings.h
+    cgpsettings.h \
+    globals.h
 
 
 FORMS    += \

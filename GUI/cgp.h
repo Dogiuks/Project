@@ -2,42 +2,19 @@
    Domas Druzas
 */
 
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif __cplusplus
 
-#include <stdio.h>
-#include <time.h>
-#include "cgp_warehouse.h"
-
 #ifndef __CGP_H__
 
 #define __CGP_H__
 
-
-#define NUM_COL 1000
-#define NUM_ROW 1
-#define NUM_NODES NUM_ROW*NUM_COL
-#define LEVELS_BACK 100
-#define POPULATION_SIZE 25
-#define PENALTY 1
-#define NUM_GENERATIONS 500
-
-#define MU 2
-//all population is mutated and parents not preserved
-#define PRESERVE_PARENTS
-//ELITISM+TOURNAMENT+ROULETTE = MU
-#define ELITISM 1
-#define TOURNAMENT 1
-//#define ROULETTE 1
-
-#ifdef TOURNAMENT
-#define T_SIZE 8
-#endif //TOURNAMENT
-#define MUTATION_RATE 0.1 //%
-
-
+#include <stdio.h>
+#include <time.h>
+#include "cgp_warehouse.h"
 
 enum Functions
 {
@@ -64,13 +41,6 @@ struct node
 
 typedef struct node* node_pointer;
 
-int first_run;
-node_pointer* input;
-
-int* old_fitness;
-
-int best_fitness;
-
 void create_output(struct node* ch);
 void coppy_output(product_pointer* source, product_pointer* destination);
 int find_worst_pick(int* pick_list, int list_size, int gate);
@@ -91,6 +61,20 @@ struct products* compute_output(struct products* a, struct products* b, enum Fun
 void clean_chromosome(struct node* ch);
 int evaluate_position(product_pointer* output, struct delivery deliv);
 int evaluate_output(product_pointer* output, struct products* product_count, int num_of_products);
+
+product_pointer* return_selected_output(int i);
+int get_elitism(void);
+int get_levels_back(void);
+int get_mutation_rate(void);
+int get_num_row(void);
+int get_num_col(void);
+int get_num_generations(void);
+int get_penalty(void);
+int get_population_size(void);
+int get_preserve_parents(void);
+int get_roulete(void);
+int get_tournament(void);
+int get_t_size(void);
 
 #endif
 

@@ -9,7 +9,7 @@
 extern "C"
 {
 #endif __cplusplus
-
+#include "globals.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -250,6 +250,31 @@ void make_deliveries(void)
         printf("delivery time %d",delivery_time);
         delivery_time = 0;
     }
+}
+
+int get_warehouse_grid_x(void)
+{
+    return warehouse_grid_x;
+}
+
+int get_warehouse_grid_y(void)
+{
+    return warehouse_grid_y;
+}
+
+int get_warehouse_grid(int x, int y)
+{
+    return warehouse_grid[y*warehouse_grid_x+x];
+}
+
+int get_num_files(void)
+{
+    return num_files;
+}
+
+char* get_file_name(int i)
+{
+    return files[i].name;
 }
 
 #ifdef __cplusplus

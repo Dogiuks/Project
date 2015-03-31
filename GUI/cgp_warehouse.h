@@ -19,9 +19,6 @@ extern "C"
 
 
 
-int warehouse_size;
-int num_gates;
-
 struct location
 {
     int  product_code;
@@ -54,18 +51,6 @@ typedef struct products* product_pointer;
 
 typedef product_pointer* outputtype;
 
-int  num_files;
-outputtype *output_array;
-
-int warehouse_grid_x;
-int warehouse_grid_y;
-int *warehouse_grid;
-struct file *files;
-struct products* empty_input;
-struct delivery* deliveries;
-//struct products output[100];
-struct location* warehouse;
-
 /* function prototypes */
 
 void create_empty_input(void);
@@ -77,6 +62,12 @@ void read_files(char file_list[MAX_FILENAME]);
 void make_deliveries(void);
 void print_warehouse(void);
 void create_dummy_output(void);
+int get_warehouse_grid_x(void);
+int get_warehouse_grid_y(void);
+int get_warehouse_grid(int x, int y);
+int get_num_files(void);
+char* get_file_name(int i);
+
 #endif
 #ifdef __cplusplus
 }

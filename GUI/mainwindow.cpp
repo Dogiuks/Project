@@ -20,18 +20,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_cgpButton_clicked()
 {
-    run_EA();
+    //run_EA();
 
 }
 
 
 void MainWindow::on_actionOpen_triggered()
 {
+    int warehouse_grid_y, warehouse_grid_x;
+    int num_files;
     create_empty_input();
 /*************************delete*************************************/
     define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");
     read_list("F:/IP/Project/GUI/files.txt");
 /*************************delete****************************************/
+    num_files = get_num_files();
+    warehouse_grid_x = get_warehouse_grid_x();
+    warehouse_grid_y = get_warehouse_grid_y();
     ui->warehouseWiew->setColumnCount(warehouse_grid_x);
     ui->warehouseWiew->setRowCount(warehouse_grid_y);
     for(int i=0; i<warehouse_grid_x;i++)
@@ -47,7 +52,7 @@ void MainWindow::on_actionOpen_triggered()
         for(int j=0; j<warehouse_grid_x; j++)
         {
             ui->warehouseWiew->setItem(i, j, new QTableWidgetItem());
-            if (warehouse_grid[i*warehouse_grid_x+j])
+            if (get_warehouse_grid(j, i))
                 ui->warehouseWiew->item(i,j)->setBackgroundColor(Qt::black);
             else
                 ui->warehouseWiew->item(i,j)->setBackgroundColor(Qt::white);
@@ -61,7 +66,7 @@ void MainWindow::on_actionOpen_triggered()
     ui->listWidget->clear();
     for(int i = 0; i<num_files; i++)
     {
-        ui->listWidget->addItem(files[i].name);
+        ui->listWidget->addItem(get_file_name(i));
     }
     ui->listWidget->setCurrentRow(0);
 }
@@ -71,6 +76,7 @@ void MainWindow::on_buttonHome_clicked()
 {
     ui->listWidget->setCurrentRow(0);
     updateWarehouseWiew();
+    //ui->warehouseWiew->item(0,0)->setText(QString::number(MU));
 }
 
 QColor MainWindow::getGradient( int atPoint, int max)
@@ -128,14 +134,19 @@ QColor MainWindow::getGradient( int atPoint, int max)
 void MainWindow::updateWarehouseWiew(void)
 {
     int count = 0;
+    int warehouse_grid_y, warehouse_grid_x;
     product_pointer *selected_output;
-    selected_output = (product_pointer *)output_array[ui->listWidget->currentRow()];
+
+    selected_output = (product_pointer *)return_selected_output(ui->listWidget->currentRow());
+
+    warehouse_grid_x = get_warehouse_grid_x();
+    warehouse_grid_y = get_warehouse_grid_y();
 
     for(int i=0; i<warehouse_grid_y;i++)
     {
         for(int j=0; j<warehouse_grid_x; j++)
         {
-            if (warehouse_grid[i*warehouse_grid_x+j])
+            if (get_warehouse_grid(j, i))
             {
                 ui->warehouseWiew->item(i,j)->setBackgroundColor(getGradient(selected_output[count]->demand, 100));
                 ui->warehouseWiew->item(i,j)->setText(QString::number(selected_output[count]->code));
@@ -147,7 +158,9 @@ void MainWindow::updateWarehouseWiew(void)
 
 void MainWindow::on_buttonNext_clicked()
 {
-    if(ui->listWidget->currentRow()<num_files-1)
+    int num_files;
+    num_files = get_num_files()-1;
+    if(ui->listWidget->currentRow()<num_files)
     {
         ui->listWidget->setCurrentRow(ui->listWidget->currentRow()+1);
         updateWarehouseWiew();
