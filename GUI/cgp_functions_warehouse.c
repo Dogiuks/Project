@@ -1,3 +1,4 @@
+
 /* cgp_functions_warehouse.c
    Domas Druzas 2015
 */
@@ -15,6 +16,8 @@ extern "C"
 #include <string.h>
 #include <math.h>
 #include <time.h>
+
+#define _CRT_SECURE_NO_WARNINGS
 
 
 void define_warehouse(char warehousefile[MAX_FILENAME], char gridfile[MAX_FILENAME])
@@ -169,7 +172,7 @@ void read_list(char file_list[MAX_FILENAME])
         num_files++;
         fscanf(fp, "%s %s %s %s", type, dummy, dummy, name);
     }
-    files = (struct file*) malloc(sizeof(struct file)*num_files);
+    files = (struct file*) realloc(files, sizeof(struct file)*num_files);
     rewind(fp);
 	fscanf(fp, "%s %s %s %s", dummy, dummy, dummy, dummy);
 
@@ -191,6 +194,40 @@ void read_list(char file_list[MAX_FILENAME])
     fclose(fp);
     calculate_product_qnt(num_files);
     printf("list reading finished");
+}
+
+int add_file(const char *productsfile, int location, int is_in)
+{
+    FILE *fp;
+    int i;
+    char name[MAX_FILENAME];
+
+    fp=fopen(productsfile,"r");
+    if (!fp)
+    {
+        printf("Missing file: %s\n",productsfile);
+        return 0;
+    }
+    num_files++;
+    files = (struct file*) realloc(files, sizeof(struct file)*num_files);
+
+    for(i=num_files; i>location; i--)
+    {
+        files[i]=files[i-1];
+    }
+
+    if(is_in)
+    {
+        files[i].in = 1;
+        files[i].deliv = read_input(name);
+    }
+    else
+    {
+        files[i].in = 0;
+        files[i].deliv = read_deliveries(name);
+    }
+    strcpy(files[i].name, productsfile);
+    return 1;
 }
 
 void print_warehouse(void)

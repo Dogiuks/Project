@@ -104,6 +104,7 @@
     <addaction name="actionOpen"/>
     <addaction name="actionImport_warehouse"/>
     <addaction name="actionCreate_warehouse"/>
+    <addaction name="actionRefresh"/>
     <addaction name="separator"/>
     <addaction name="actionAdd_file"/>
     <addaction name="actionCreate_file"/>
@@ -183,6 +184,14 @@
   <action name="actionUser_manual">
    <property name="text">
     <string>User manual</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>

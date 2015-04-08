@@ -32,6 +32,12 @@ private slots:
 
     void on_actionCGP_settings_triggered();
 
+    void on_actionSave_triggered();
+
+    void on_actionAdd_file_triggered();
+
+    void on_actionRefresh_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

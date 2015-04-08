@@ -183,3 +183,26 @@ void MainWindow::on_actionCGP_settings_triggered()
     settings.setModal(true);
     settings.exec();
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+
+}
+
+void MainWindow::on_actionAdd_file_triggered()
+{
+    OpenDialog open;
+    open.setModal(true);
+    open.exec();
+}
+
+void MainWindow::on_actionRefresh_triggered()
+{
+    //updateWarehouseWiew();
+    ui->listWidget->clear();
+    for(int i = 0; i<get_num_files(); i++)
+    {
+        ui->listWidget->addItem(get_file_name(i));
+    }
+    ui->listWidget->setCurrentRow(0);
+}
