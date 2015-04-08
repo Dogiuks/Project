@@ -21,6 +21,7 @@ void run_EA(void)
     int* fitness;
     int fittest = 0;
     NUM_NODES = NUM_ROW*NUM_COL;
+    MU = ELITISM+TOURNAMENT+ROULETTE;
 
     fitness = (int*) malloc(sizeof(int)*POPULATION_SIZE);
     population = (node_pointer*)malloc(sizeof(node_pointer)*POPULATION_SIZE);
@@ -179,7 +180,6 @@ void select_parents(node_pointer* population, int* fitness)
 void mutate(struct node* ch)
 {
     int random, i;
-    clean_chromosome(ch);
 
     for(i=0;i<MUTATION_RATE*NUM_NODES/100;i++)
     {
@@ -384,7 +384,7 @@ struct node* create_chromosome(void)
 {
     struct node* ch;
     int i;
-
+    i = NUM_NODES;
     ch = (struct node *)malloc(sizeof(struct node)*NUM_NODES);
     for (i=0; i<NUM_NODES; i++)
     {
@@ -459,13 +459,16 @@ void clean_chromosome(struct node* ch)
 void compute_node(int i, struct node* ch)
 {
     struct products *a, *b;
+    int temp, temp2;
 
     i = i-warehouse_size;
     if (ch[i].out ==0)
     {
         if (ch[i].a < warehouse_size)
         {
-            a = input[ch[i].a];
+            temp = ch[i].a;
+            temp2 = ch[i].b;
+            a = input[temp];
         }
         else
         {
@@ -585,6 +588,8 @@ void calculate_product_qnt(int step)
     struct products* product_count;
     int i, j, k;
     int array_size;
+
+    printf(files[0].name);
 
     array_size = files[0].deliv.list_size;
 

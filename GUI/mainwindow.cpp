@@ -20,8 +20,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_cgpButton_clicked()
 {
-    //run_EA();
-
+    ui->statusbar->showMessage("CGP running!", 0);
+    run_EA();
+    ui->statusbar->clearMessage();
 }
 
 
