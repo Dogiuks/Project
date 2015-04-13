@@ -14,7 +14,7 @@ CGPSettings::CGPSettings(QWidget *parent) :
     ui->num_col_spinBox->setValue(get_num_col());
     ui->num_generations_spinBox->setValue(get_num_generations());
     ui->num_row_spinBox->setValue(get_num_row());
-    ui->Penalty_spinBox->setValue(get_penalty());
+    ui->penalty_spinBox->setValue(get_penalty());
     ui->preserve_parents_checkBox->setChecked(get_preserve_parents());
     ui->population_size_spinBox->setValue(get_population_size());
     ui->roulete_spinBox->setValue(get_roulete());
@@ -36,7 +36,7 @@ void CGPSettings::on_buttonBox_accepted()
     set_num_row(ui->num_row_spinBox->value());
     set_num_col(ui->num_col_spinBox->value());
     set_num_generations(ui->num_generations_spinBox->value());
-    set_penalty(ui->Penalty_spinBox->value());
+    set_penalty(ui->penalty_spinBox->value());
     set_population_size(ui->population_size_spinBox->value());
     set_preserve_parents(ui->preserve_parents_checkBox->isChecked());
     set_roulete(ui->roulete_spinBox->value());

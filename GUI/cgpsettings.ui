@@ -425,24 +425,18 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="Penalty_spinBox">
-          <property name="minimumSize">
-           <size>
-            <width>80</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>16777215</height>
-           </size>
+         <widget class="QDoubleSpinBox" name="penalty_spinBox">
+          <property name="decimals">
+           <number>1</number>
           </property>
           <property name="maximum">
-           <number>10</number>
+           <double>10.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
           </property>
           <property name="value">
-           <number>1</number>
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>

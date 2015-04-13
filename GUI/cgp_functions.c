@@ -696,7 +696,7 @@ int get_num_generations(void)
     return NUM_GENERATIONS;
 }
 
-int get_penalty(void)
+double get_penalty(void)
 {
     return PENALTY;
 }
@@ -755,7 +755,7 @@ void set_num_generations(int a)
     NUM_GENERATIONS = a;
 }
 
-void set_penalty(int a)
+void set_penalty(double a)
 {
     PENALTY = a;
 }

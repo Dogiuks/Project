@@ -11,7 +11,7 @@ static int NUM_ROW = 1;
 int NUM_NODES;
 static int LEVELS_BACK = 100;
 static int POPULATION_SIZE = 25;
-static int PENALTY = 1;
+static double PENALTY = 1;
 static int NUM_GENERATIONS = 500;
 
 static int MU = 2;
