@@ -36,7 +36,7 @@ struct node
     enum Functions func;
     int a;
     int b;
-    struct products* out;
+    struct prducts* out;
 };
 
 typedef struct node* node_pointer;
@@ -61,12 +61,11 @@ struct products* compute_output(struct products* a, struct products* b, enum Fun
 void clean_chromosome(struct node* ch);
 int evaluate_position(product_pointer* output, struct delivery deliv);
 int evaluate_output(product_pointer* output, struct products* product_count, int num_of_products);
-void calculate_product_qnt(int step);
 
 product_pointer* return_selected_output(int i);
 int get_elitism(void);
 int get_levels_back(void);
-double get_mutation_rate(void);
+int get_mutation_rate(void);
 int get_num_row(void);
 int get_num_col(void);
 int get_num_generations(void);

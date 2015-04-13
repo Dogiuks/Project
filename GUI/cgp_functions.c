@@ -7,7 +7,6 @@ extern "C"
 {
 #endif __cplusplus
 
-#define _CRT_SECURE_NO_WARNINGS
 #include "cgp_warehouse.h"
 #include "cgp.h"
 #include "globals.h"
@@ -78,7 +77,7 @@ void print_product_list(struct node* ch, char output_file[MAX_FILENAME])
 
     for (i=0; i<warehouse_size; i++)
     {
-        temp = (struct products*) ch[NUM_NODES+i-warehouse_size].out;
+        temp = ch[NUM_NODES+i-warehouse_size].out;
         out[i] = *temp;
     }
 
@@ -141,7 +140,6 @@ void select_parents(node_pointer* population, int* fitness)
 
     for(j=0;j<ROULETTE;j++)
     {
-        total = 0;
         best = 0;
         for(i=0;i<POPULATION_SIZE;i++)
         {
@@ -470,22 +468,22 @@ void compute_node(int i, struct node* ch)
         {
             temp = ch[i].a;
             temp2 = ch[i].b;
-            a = (struct products*) input[temp];
+            a = input[temp];
         }
         else
         {
             compute_node(ch[i].a, ch);
-            a = (struct products*) ch[ch[i].a - warehouse_size].out;
+            a = ch[ch[i].a - warehouse_size].out;
         }
 
         if (ch[i].b < warehouse_size)
         {
-            b = (struct products*) input[ch[i].b];
+            b = input[ch[i].b];
         }
         else
         {
             compute_node(ch[i].b, ch);
-            b = (struct products*) ch[ch[i].b - warehouse_size].out;
+            b = ch[ch[i].b - warehouse_size].out;
         }
         ch[i].out = compute_output(a, b, ch[i].func);
     }
@@ -563,7 +561,7 @@ void create_input(struct products* product_count, int num_of_products)
     int i,j,n=0;
     //int num_of_products;
 
-    input = (node_pointer*)realloc(input, sizeof(node_pointer)*warehouse_size);
+    input = (product_pointer*)realloc(input, sizeof(product_pointer)*warehouse_size);
     for (i=0; i<num_of_products; i++)
     {
         if(n+product_count[i].qnt>warehouse_size)
@@ -573,7 +571,7 @@ void create_input(struct products* product_count, int num_of_products)
         }
         for (j=0;j<product_count[i].qnt;j++)
         {
-            input[n+j] = (node_pointer) product_count+i;
+            input[n+j] = product_count+i;
         }
         n+=product_count[i].qnt;
     }
@@ -581,7 +579,7 @@ void create_input(struct products* product_count, int num_of_products)
     //Make empty locations
     for (;n<warehouse_size;n++)
     {
-        input[n]= (node_pointer) empty_input;
+        input[n]=empty_input;
     }
 }
 
@@ -678,7 +676,7 @@ int get_levels_back(void)
     return LEVELS_BACK;
 }
 
-double get_mutation_rate(void)
+int get_mutation_rate(void)
 {
     return MUTATION_RATE;
 }

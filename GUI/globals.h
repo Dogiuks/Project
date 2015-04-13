@@ -23,7 +23,7 @@ static int TOURNAMENT = 0;
 static int ROULETTE = 0;
 
 static int T_SIZE = 8;
-static double MUTATION_RATE = 0.1; //%
+static float MUTATION_RATE = 0.1; //%
 
 int warehouse_size;
 int num_gates;
