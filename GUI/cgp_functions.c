@@ -52,6 +52,8 @@ void run_EA(void)
             fittest = i;
     }
     create_output(population[fittest]);
+    best_ch = (struct node *)realloc(best_ch, sizeof(struct node)*NUM_NODES);
+    copy_chromosome(population[fittest], best_ch);
 }
 
 void write_output(node_pointer* population, int* fitness)
@@ -362,7 +364,7 @@ int find_worst_pick(int* pick_list, int list_size, int gate)
 void create_population(node_pointer* population)
 {
     int i;
-    if (1)
+    if (first_run)
     {
         for (i=0; i<POPULATION_SIZE; i++)
         {
@@ -374,7 +376,8 @@ void create_population(node_pointer* population)
     {
         for (i=MU; i<POPULATION_SIZE; i++)
         {
-            //make copy and mutate
+            population[i]= create_chromosome();
+            copy_chromosome(best_ch, population[i]);
         }
     }
 
@@ -783,6 +786,11 @@ void set_tournament(int a)
 void set_t_size(int a)
 {
     T_SIZE = a;
+}
+
+void set_first_run(void)
+{
+    first_run = 1;
 }
 
 #ifdef __cplusplus

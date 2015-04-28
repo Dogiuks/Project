@@ -30,6 +30,7 @@ void MainWindow::on_actionOpen_triggered()
 {
     int warehouse_grid_y, warehouse_grid_x;
     int num_files;
+    set_first_run();
     create_empty_input();
 /*************************delete*************************************/
     define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");

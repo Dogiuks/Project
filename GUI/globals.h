@@ -40,7 +40,7 @@ struct delivery* deliveries;
 struct location* warehouse;
 int first_run;
 node_pointer* input;
-
+struct node* best_ch;
 int* old_fitness;
 
 int best_fitness;

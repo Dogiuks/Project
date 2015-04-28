@@ -87,6 +87,7 @@ void set_preserve_parents(int a);
 void set_roulete(int a);
 void set_tournament(int a);
 void set_t_size(int a);
+void set_first_run(void);
 
 #endif
 
