@@ -23,7 +23,7 @@ static int TOURNAMENT = 0;
 static int ROULETTE = 0;
 
 static int T_SIZE = 8;
-static float MUTATION_RATE = 0.1; //%
+static double MUTATION_RATE = 0.1; //%
 
 int warehouse_size;
 int num_gates;
@@ -39,11 +39,11 @@ struct delivery* deliveries;
 //struct products output[100];
 struct location* warehouse;
 int first_run;
-node_pointer* input;
+product_pointer* input;
 struct node* best_ch;
-int* old_fitness;
+double* old_fitness;
 
-int best_fitness;
+double best_fitness;
 
 #endif // GLOBALS_H
 

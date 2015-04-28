@@ -18,12 +18,12 @@ void run_EA(void)
 {
     node_pointer* population;
     int i, j;
-    int* fitness;
+    double* fitness;
     int fittest = 0;
     NUM_NODES = NUM_ROW*NUM_COL;
     MU = ELITISM+TOURNAMENT+ROULETTE;
 
-    fitness = (int*) malloc(sizeof(int)*POPULATION_SIZE);
+    fitness = (double*) malloc(sizeof(double)*POPULATION_SIZE);
     population = (node_pointer*)malloc(sizeof(node_pointer)*POPULATION_SIZE);
     create_population(population);
     for(i=0;i<NUM_GENERATIONS;i++)
@@ -42,7 +42,7 @@ void run_EA(void)
         }
         if(i%10==0)
         {
-            printf("For generaton %d best fitness is: %d\n", i, best_fitness);
+            printf("For generaton %d best fitness is: %d\n", i, (int) best_fitness);
         }
     }
     evaluate_population(population, fitness);
@@ -65,7 +65,7 @@ void write_output(node_pointer* population, int* fitness)
             best = i;
     }
     best_fitness = fitness[best];
-    printf("CGP finished with best fitness %d\n", best_fitness);
+    printf("CGP finished with best fitness %d\n", (int)best_fitness);
     print_product_list(population[best], "Testfiles/out.txt");
 }
 
@@ -99,12 +99,13 @@ void print_product_list(struct node* ch, char output_file[MAX_FILENAME])
     free(out);
 }
 
-void select_parents(node_pointer* population, int* fitness)
+void select_parents(node_pointer* population, double* fitness)
 {
-    int best, i, j, n=0;
+    int best;
+    int i, j, n=0;
     int random;
     node_pointer *new_population;
-    int total;
+    double total =0;
 
     new_population = (node_pointer*)malloc(sizeof(node_pointer)*MU);
 
@@ -190,7 +191,7 @@ void mutate(struct node* ch)
     }
 }
 
-void evaluate_population(node_pointer* population, int* evaluation)
+void evaluate_population(node_pointer* population, double* evaluation)
 {
     int i,j;
     product_pointer* output;
@@ -264,11 +265,12 @@ void coppy_output(product_pointer* source, product_pointer* destination)
         destination[i] = source[i];
 }
 
-int evaluate_output(product_pointer* output, struct products* product_count, int num_of_products)
+double evaluate_output(product_pointer* output, struct products* product_count, int num_of_products)
 {
     int i,j;
     struct products* counter;
-    int code, fitness=0;
+    int code;
+    double fitness=0;
 
     //make product_count copy
     counter = (struct products*)malloc(sizeof(struct products)*num_of_products);
@@ -328,7 +330,7 @@ int evaluate_position(product_pointer* output, struct delivery deliv)
         for (; k<warehouse_size;k++)
         {
             if((output[k]->code == code)
-                && (warehouse[k].dist[gate]<warehouse[worst_pick].dist[gate]))
+                && (warehouse[k].dist[gate]<warehouse[pickup_list[worst_pick]].dist[gate]))
             {
                 pickup_list[worst_pick]=k;
                 worst_pick = find_worst_pick(pickup_list, deliv.load[j].qnt, gate);
@@ -347,10 +349,11 @@ int evaluate_position(product_pointer* output, struct delivery deliv)
 
 int find_worst_pick(int* pick_list, int list_size, int gate)
 {
-    int worst_pick,  max_dist = 0;
+    int worst_pick = 0,  max_dist;
     int i;
 
-    for(i=0;i<list_size;i++)
+    max_dist = warehouse[pick_list[0]].dist[gate];
+    for(i=1;i<list_size;i++)
     {
         if(warehouse[pick_list[i]].dist[gate]>max_dist)
         {
@@ -374,7 +377,7 @@ void create_population(node_pointer* population)
     }
     else
     {
-        for (i=MU; i<POPULATION_SIZE; i++)
+        for (i=0; i<POPULATION_SIZE; i++)
         {
             population[i]= create_chromosome();
             copy_chromosome(best_ch, population[i]);
@@ -462,16 +465,13 @@ void clean_chromosome(struct node* ch)
 void compute_node(int i, struct node* ch)
 {
     struct products *a, *b;
-    int temp, temp2;
 
     i = i-warehouse_size;
     if (ch[i].out ==0)
     {
         if (ch[i].a < warehouse_size)
         {
-            temp = ch[i].a;
-            temp2 = ch[i].b;
-            a = input[temp];
+            a = (struct products *) input[ch[i].a];
         }
         else
         {
@@ -481,7 +481,7 @@ void compute_node(int i, struct node* ch)
 
         if (ch[i].b < warehouse_size)
         {
-            b = input[ch[i].b];
+            b = (struct products *) input[ch[i].b];
         }
         else
         {
@@ -574,7 +574,7 @@ void create_input(struct products* product_count, int num_of_products)
         }
         for (j=0;j<product_count[i].qnt;j++)
         {
-            input[n+j] = product_count+i;
+            input[n+j] = (struct products*) product_count+i;
         }
         n+=product_count[i].qnt;
     }
@@ -582,7 +582,7 @@ void create_input(struct products* product_count, int num_of_products)
     //Make empty locations
     for (;n<warehouse_size;n++)
     {
-        input[n]=empty_input;
+        input[n]= (struct products*) empty_input;
     }
 }
 
@@ -679,7 +679,7 @@ int get_levels_back(void)
     return LEVELS_BACK;
 }
 
-int get_mutation_rate(void)
+double get_mutation_rate(void)
 {
     return MUTATION_RATE;
 }
@@ -738,7 +738,7 @@ void set_levels_back(int a)
     LEVELS_BACK = a;
 }
 
-void set_mutation_rate(float a)
+void set_mutation_rate(double a)
 {
     MUTATION_RATE = a;
 }

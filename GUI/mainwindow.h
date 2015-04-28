@@ -32,6 +32,8 @@ private slots:
 
     void on_actionCGP_settings_triggered();
 
+    void on_listWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 };

@@ -184,3 +184,8 @@ void MainWindow::on_actionCGP_settings_triggered()
     settings.setModal(true);
     settings.exec();
 }
+
+void MainWindow::on_listWidget_clicked(const QModelIndex &index)
+{
+    updateWarehouseWiew();
+}
