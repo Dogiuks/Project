@@ -33,8 +33,16 @@ void CGPSettings::on_buttonBox_accepted()
     set_elitism(ui->elytism_spinBox->value());
     set_levels_back(ui->levels_back_spinBox->value());
     set_mutation_rate(ui->mutation_rate_spinBox->value());
-    set_num_row(ui->num_row_spinBox->value());
-    set_num_col(ui->num_col_spinBox->value());
+    if(ui->num_row_spinBox->value() != get_num_row())
+    {
+        set_num_row(ui->num_row_spinBox->value());
+        set_first_run();
+    }
+    if(ui->num_col_spinBox->value() != get_num_col())
+    {
+        set_num_col(ui->num_col_spinBox->value());
+        set_first_run();
+    }
     set_num_generations(ui->num_generations_spinBox->value());
     set_penalty(ui->penalty_spinBox->value());
     set_population_size(ui->population_size_spinBox->value());

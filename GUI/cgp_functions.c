@@ -326,7 +326,10 @@ int evaluate_position(product_pointer* output, struct delivery deliv)
             k++;
         }while((k<warehouse_size) && (i < deliv.load[j].qnt));
         //look for products closer to the gate
-        worst_pick = find_worst_pick(pickup_list, i, gate);
+        if(i != 0)
+        {
+            worst_pick = find_worst_pick(pickup_list, i, gate);
+        }
         for (; k<warehouse_size;k++)
         {
             if((output[k]->code == code)
@@ -726,6 +729,11 @@ int get_tournament(void)
 int get_t_size(void)
 {
     return T_SIZE;
+}
+
+double get_best_fitness(void)
+{
+    return best_fitness;
 }
 
 void set_elitism(int a)

@@ -22,7 +22,7 @@ void MainWindow::on_cgpButton_clicked()
 {
     ui->statusbar->showMessage("CGP running!", 0);
     run_EA();
-    ui->statusbar->clearMessage();
+    ui->statusbar->showMessage("CGP finished with fitness:"+QString::number(get_best_fitness()), 0);
 }
 
 

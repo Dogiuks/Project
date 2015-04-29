@@ -75,6 +75,7 @@ int get_preserve_parents(void);
 int get_roulete(void);
 int get_tournament(void);
 int get_t_size(void);
+double get_best_fitness(void);
 void set_elitism(int a);
 void set_levels_back(int a);
 void set_mutation_rate(double a);
