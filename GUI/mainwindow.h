@@ -33,6 +33,7 @@ private slots:
     void on_actionCGP_settings_triggered();
 
     void on_listWidget_clicked(const QModelIndex &index);
+    void MainWindow::make_legend();
 
 private:
     Ui::MainWindow *ui;

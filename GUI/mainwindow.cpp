@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    make_legend();
 }
 
 MainWindow::~MainWindow()
@@ -32,10 +33,8 @@ void MainWindow::on_actionOpen_triggered()
     int num_files;
     set_first_run();
     create_empty_input();
-/*************************delete*************************************/
     define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");
     read_list("F:/IP/Project/GUI/files.txt");
-/*************************delete****************************************/
     num_files = get_num_files();
     warehouse_grid_x = get_warehouse_grid_x();
     warehouse_grid_y = get_warehouse_grid_y();
@@ -86,6 +85,11 @@ QColor MainWindow::getGradient( int atPoint, int max)
     int red;
     int green;
     int blue;
+
+    if(atPoint == 0)
+    {
+        return QColor(0, 0, 0, 255);
+    }
     int num = (74*atPoint/max);
 
     if(num>60)
@@ -118,17 +122,11 @@ QColor MainWindow::getGradient( int atPoint, int max)
             green = 228-16*(21-num);
             blue = 255;
     }
-    else if(num>0)
+    else
     {
         red = 6-num;
         green = 0;
         blue = 255;
-    }
-    else
-    {
-        red = 0;
-        green = 0;
-        blue = 0;
     }
     return QColor(red, green, blue, 255);
 }
@@ -188,4 +186,15 @@ void MainWindow::on_actionCGP_settings_triggered()
 void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 {
     updateWarehouseWiew();
+}
+
+void MainWindow::make_legend(void)
+{
+    for(int i=0;i<34;i++)
+    {
+        ui->legend->addItem(QString::number(i*3+1));
+        ui->legend->item(i)->setBackgroundColor(getGradient(i*3+1, 100));
+        ui->legend->item(i)->setTextColor(Qt::black);
+    }
+
 }
