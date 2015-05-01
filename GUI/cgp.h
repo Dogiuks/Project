@@ -42,13 +42,14 @@ struct node
 typedef struct node* node_pointer;
 
 void create_output(struct node* ch);
+void save_layout(product_pointer* output, int* old_output);
 void coppy_output(product_pointer* source, product_pointer* destination);
 int find_worst_pick(int* pick_list, int list_size, int gate);
 void run_EA(void);
 void create_population(node_pointer* population);
 void evaluate_population(node_pointer* population, double* evaluation);
 struct node* create_chromosome(void);
-double evaluate_output(product_pointer* output, struct products* product_count, int num_of_products);
+double evaluate_output(product_pointer* output, int *old_output, struct products* product_count, int num_of_products);
 struct node create_random_node(int collumn);
 void create_input(struct products* product_count, int num_of_products);
 void calculate_product_qnt(int step);

@@ -195,12 +195,18 @@ void evaluate_population(node_pointer* population, double* evaluation)
 {
     int i,j;
     product_pointer* output;
+    int* output_copy;
     struct products* product_count;
     int num_of_products;
     //int evaluation;
 
     output = (product_pointer*)malloc(sizeof(product_pointer)*warehouse_size);
-    //evaluation = (int*) malloc(sizeof(int)*POPULATION_SIZE);
+    output_copy = (int*)malloc(sizeof(int)*warehouse_size);
+    //initialize to 0
+    for(i=0;i<warehouse_size;i++)
+    {
+        output_copy[i]=0;
+    }
 
     for(i=0;i<POPULATION_SIZE;i++)
     {
@@ -209,12 +215,16 @@ void evaluate_population(node_pointer* population, double* evaluation)
         {
             if(files[j].in)
             {
+                if(j>0)
+                {
+                    save_layout(output, output_copy);
+                }
                 product_count = files[j].deliv.load;
                 num_of_products = files[j].deliv.list_size;
                 create_input(product_count, num_of_products);
                 clean_chromosome(population[i]);
                 decode(population[i], output);
-                evaluation[i] += (evaluate_output(output, product_count,
+                evaluation[i] += (evaluate_output(output, output_copy, product_count,
                                                   num_of_products)/(j+1));
             }
             else
@@ -225,6 +235,15 @@ void evaluate_population(node_pointer* population, double* evaluation)
         }
     }
     free(output);
+}
+
+void save_layout(product_pointer* output, int* old_output)
+{
+    int i;
+    for(i=0;i<warehouse_size;i++)
+    {
+        old_output[i] = output[i]->code;
+    }
 }
 
 void create_output(struct node* ch)
@@ -265,7 +284,7 @@ void coppy_output(product_pointer* source, product_pointer* destination)
         destination[i] = source[i];
 }
 
-double evaluate_output(product_pointer* output, struct products* product_count, int num_of_products)
+double evaluate_output(product_pointer* output, int* old_output, struct products* product_count, int num_of_products)
 {
     int i,j;
     struct products* counter;
@@ -277,6 +296,15 @@ double evaluate_output(product_pointer* output, struct products* product_count, 
     for (i=0;i<num_of_products;i++)
     {
         counter[i]=product_count[i];
+    }
+    //check if any products were moved
+    for(i=0;i<warehouse_size;i++)
+    {
+        if(old_output[i] != 0 && old_output[i] != output[i]->code)
+        {
+            //add penalty for every moved item
+            fitness++;
+        }
     }
     //check that all products represented
     for (j=0;j<warehouse_size;j++)
