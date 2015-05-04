@@ -235,7 +235,7 @@ void evaluate_population(node_pointer* population, double* evaluation)
                 evaluation[i] += evaluate_position(output, files[j].deliv);
             }
         }
-        if(missing==0&&done==0)
+        if(missing<10&&done==0)
         {
             printf("All products allocated!!!\n");
             done=1;
