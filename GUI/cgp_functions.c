@@ -30,12 +30,13 @@ void run_EA(void)
     {
         evaluate_population(population, fitness);
         select_parents(population, fitness);
-        #ifndef PRESERVE_PARENTS
-        for (j=0; j<MU; j++)
+        if(PRESERVE_PARENTS==0)
         {
-            mutate(population[j]);
+            for (j=0; j<MU; j++)
+            {
+                mutate(population[j]);
+            }
         }
-        #endif // PRESERVE_PARENTS
         for (j=MU; j<POPULATION_SIZE; j++)
         {
             mutate(population[j]);
@@ -211,6 +212,7 @@ void evaluate_population(node_pointer* population, double* evaluation)
     for(i=0;i<POPULATION_SIZE;i++)
     {
         evaluation[i] = 0;
+        missing = 0;
         for(j=0;j<num_files;j++)
         {
             if(files[j].in)
@@ -233,6 +235,12 @@ void evaluate_population(node_pointer* population, double* evaluation)
                 evaluation[i] += evaluate_position(output, files[j].deliv);
             }
         }
+        if(missing==0&&done==0)
+        {
+            printf("All products allocated!!!\n");
+            done=1;
+        }
+
     }
     free(output);
 }
@@ -323,6 +331,7 @@ double evaluate_output(product_pointer* output, int* old_output, struct products
     for (i=0;i<num_of_products;i++)
     {
         fitness+= abs(counter[i].qnt);
+        missing+= abs(counter[i].qnt);
     }
     fitness = fitness*PENALTY*warehouse_size;
     free(counter);
@@ -827,6 +836,7 @@ void set_t_size(int a)
 void set_first_run(void)
 {
     first_run = 1;
+    done=0;
 }
 
 #ifdef __cplusplus

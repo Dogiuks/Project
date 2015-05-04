@@ -33,8 +33,8 @@ void MainWindow::on_actionOpen_triggered()
     int num_files;
     set_first_run();
     create_empty_input();
-    define_warehouse("F:/IP/Project/GUI/warehouse.txt", "F:/IP/Project/GUI/warehouse_grid.txt");
-    read_list("F:/IP/Project/GUI/files.txt");
+    define_warehouse("warehouse.txt", "warehouse_grid.txt");
+    read_list("files.txt");
     num_files = get_num_files();
     warehouse_grid_x = get_warehouse_grid_x();
     warehouse_grid_y = get_warehouse_grid_y();

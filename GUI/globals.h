@@ -7,23 +7,23 @@ extern "C"
 #define GLOBALS_H
 
 static int NUM_COL = 1000;
-static int NUM_ROW = 1;
+static int NUM_ROW = 3;
 int NUM_NODES;
-static int LEVELS_BACK = 100;
+static int LEVELS_BACK = 50;
 static int POPULATION_SIZE = 25;
 static double PENALTY = 1;
-static int NUM_GENERATIONS = 500;
+static int NUM_GENERATIONS = 5000;
 
 static int MU = 2;
 //all population is mutated and parents not preserved
 static int PRESERVE_PARENTS = 1;
 //ELITISM+TOURNAMENT+ROULETTE = MU
 static int ELITISM = 1;
-static int TOURNAMENT = 0;
+static int TOURNAMENT = 4;
 static int ROULETTE = 0;
 
 static int T_SIZE = 8;
-static double MUTATION_RATE = 0.1; //%
+static double MUTATION_RATE = 0.3; //%
 
 int warehouse_size;
 int num_gates;
@@ -44,6 +44,8 @@ struct node* best_ch;
 double* old_fitness;
 
 double best_fitness;
+int missing;
+static int done =0;
 
 #endif // GLOBALS_H
 
