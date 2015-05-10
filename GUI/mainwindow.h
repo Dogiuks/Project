@@ -35,6 +35,10 @@ private slots:
     void on_listWidget_clicked(const QModelIndex &index);
     void MainWindow::make_legend();
 
+    void on_actionAbout_triggered();
+
+    void on_actionUser_manual_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

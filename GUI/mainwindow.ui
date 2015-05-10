@@ -148,20 +148,12 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
-    <addaction name="actionImport_warehouse"/>
-    <addaction name="actionCreate_warehouse"/>
-    <addaction name="separator"/>
-    <addaction name="actionAdd_file"/>
-    <addaction name="actionCreate_file"/>
-    <addaction name="separator"/>
-    <addaction name="actionSave"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
      <string>Options</string>
     </property>
     <addaction name="actionCGP_settings"/>
-    <addaction name="actionEditor_settings"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">

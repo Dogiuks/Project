@@ -4,6 +4,8 @@
 #include "cgp.h"
 #include "cgpsettings.h"
 #include "opendialog.h"
+#include "QDesktopServices"
+#include "QUrl"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -24,6 +26,11 @@ void MainWindow::on_cgpButton_clicked()
     ui->statusbar->showMessage("CGP running!", 0);
     run_EA();
     ui->statusbar->showMessage("CGP finished with fitness:"+QString::number(get_best_fitness()), 0);
+    updateWarehouseWiew();
+    ui->buttonHome->setEnabled(true);
+    ui->buttonBack->setEnabled(true);
+    ui->buttonNext->setEnabled(true);
+    ui->listWidget->setEnabled(true);
 }
 
 
@@ -61,9 +68,10 @@ void MainWindow::on_actionOpen_triggered()
     }
 
     ui->cgpButton->setEnabled(true);
-    ui->buttonHome->setEnabled(true);
-    ui->buttonBack->setEnabled(true);
-    ui->buttonNext->setEnabled(true);
+    ui->buttonHome->setEnabled(false);
+    ui->buttonBack->setEnabled(false);
+    ui->buttonNext->setEnabled(false);
+    ui->listWidget->setEnabled(false);
     ui->listWidget->clear();
     for(int i = 0; i<num_files; i++)
     {
@@ -197,4 +205,14 @@ void MainWindow::make_legend(void)
         ui->legend->item(i)->setTextColor(Qt::black);
     }
 
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QDesktopServices::openUrl(QUrl("file:doc/FinalReport.pdf"));
+}
+
+void MainWindow::on_actionUser_manual_triggered()
+{
+    QDesktopServices::openUrl(QUrl("file:doc/Manual.pdf"));
 }
